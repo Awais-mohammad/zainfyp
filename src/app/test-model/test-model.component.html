@@ -1,0 +1,71 @@
+
+<div style="display:flex;justify-content: end;align-items: flex-end;">
+    <mat-icon (click)="close()" style="color: red;" class="material-symbols-outlined">
+        cancel
+    </mat-icon>
+</div>
+
+<div style="text-align: center;">
+<h3 *ngIf="listModels" style="font-family: Georgia;font-weight:bold">Pretrained Models</h3>
+
+<h3 *ngIf="!listModels" style="font-family: Georgia;font-weight:bold">Test Model</h3>
+</div>
+
+<div *ngIf="listModels">
+   
+    <table class="uicc-table uicc-table--bordered uicc-table--block uicc-table--responsiveSmallDown">
+      <thead>
+      <tr class="uicc-table__row">
+        <th class="uicc-table__cell uicc-table__cell--headline uicc-table__cell--contentAsResponsiveHeadline">Model Name</th>
+        <th class="uicc-table__cell uicc-table__cell--headline">Timestamp</th>
+        <th class="uicc-table__cell uicc-table__cell--headline">Features</th>
+        <th class="uicc-table__cell uicc-table__cell--headline">Preprocessing</th>
+        <th class="uicc-table__cell uicc-table__cell--headline">Validation Technique</th>
+        <th class="uicc-table__cell uicc-table__cell--headline">Eval Matrix</th>
+        <th class="uicc-table__cell uicc-table__cell--headline">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of models" class="uicc-table__row">
+        <td class="uicc-table__cell" data-uicc-th="Col A" style="text-align: center;">{{item.model}}</td>
+        <td class="uicc-table__cell" data-uicc-th="Col B" style="text-align: center;">{{item?.timestamp}}</td>
+        <td class="uicc-table__cell" data-uicc-th="Col C" style="text-align: center;">{{item?.feaute}}</td>
+        <td class="uicc-table__cell" data-uicc-th="Col C" style="text-align: center;">
+        <p *ngIf="item?.acc">Accuracy:{{item?.acc}}</p>
+        <p *ngIf="item?.prec">Precision:{{item?.prec}}</p>
+        <p *ngIf="item?.recal">Recall:{{item?.recal}}</p>
+        <p *ngIf="item?.fm">Fmeasures:{{item?.acc}}</p>
+        </td>
+        <td class="uicc-table__cell" data-uicc-th="Col C" style="text-align: center;">{{item?.preprocessing}}</td>
+        <td class="uicc-table__cell" data-uicc-th="Col C" style="text-align: center;">{{item?.valTech}}</td>
+        <td class="uicc-table__cell" data-uicc-th="Col C" style="text-align: center;">
+            <button *ngIf="item.valTech == 'holdout' " (click)="testModel(item)">
+                Test
+            </button>
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+    
+</div>
+
+<div *ngIf="!listModels">
+
+    
+    <div style="text-align:center;">
+        <h1 style="color:black;font-size:18px;">Enter a review to test</h1>
+    
+        <div style="position:relative;top:7em">
+    
+            <mat-form-field style="width: 80%;" class="example-full-width">
+                <mat-label>Unseen Review</mat-label>
+                <input [(ngModel)]="querry" matInput placeholder="Enter an unseen review to classify">
+              </mat-form-field>
+    <br>
+              <button (click)="getLabel()">Predict</button>
+    
+        </div>
+    
+    </div>
+</div>

@@ -1,0 +1,471 @@
+<aside class="sidebar">
+  <nav>
+    <div class="nav_items">
+      <a
+        class="hovereffect"
+        (click)="goHome('Dataset')"
+        >HOME</a
+      >
+    
+      <a
+        class="hovereffect"
+        (click)="changeView('Dataset')"
+        *ngIf="currentView != 'Dataset'"
+        >Dataset</a
+      >
+      <a class="hovereffect" class="active" *ngIf="currentView == 'Dataset'"
+        >Dataset</a
+      >
+
+      <a
+        class="hovereffect"
+        (click)="changeView('Features')"
+        *ngIf="currentView != 'Features'"
+        >Features</a
+      >
+      <a class="hovereffect" class="active" *ngIf="currentView == 'Features'"
+        >Features</a
+      >
+
+      <a
+        class="hovereffect"
+        (click)="changeView('Preprocess')"
+        *ngIf="currentView != 'Preprocess'"
+        >Preprocessing</a
+      >
+      <a class="hovereffect" class="active" *ngIf="currentView == 'Preprocess'"
+        >Preprocessing</a
+      >
+
+      <a
+        class="hovereffect"
+        (click)="changeView('mlModel')"
+        *ngIf="currentView != 'mlModel'"
+        >Train Model</a
+      >
+      <a class="hovereffect" class="active" *ngIf="currentView == 'mlModel'"
+        >Train Model</a
+      >
+
+      <a
+        class="hovereffect"
+        (click)="changeView('valmeth')"
+        *ngIf="currentView != 'valmeth'"
+        >Validation Method</a
+      >
+      <a class="hovereffect" class="active" *ngIf="currentView == 'valmeth'"
+        >Validation Method</a
+      >
+
+      <a
+        class="hovereffect"
+        (click)="changeView('evalMet')"
+        *ngIf="currentView != 'evalMet'"
+        >Evaluation Metrics</a
+      >
+      <a class="hovereffect" class="active" *ngIf="currentView == 'evalMet'"
+        >Evaluation Metrics</a
+      >
+
+      <a
+        class="hovereffect"
+        (click)="changeView('results')"
+        *ngIf="currentView != 'results'"
+        >Results</a
+      >
+      <a class="hovereffect" class="active" *ngIf="currentView == 'results'"
+        >Results</a
+      >
+
+      <!-- for active000 -->
+    </div>
+  </nav>
+</aside>
+
+<main style="position:relative;left:110px;top:-5em" class="right">
+  <label for="MenuToggle" class="toggle__icon">
+    <span class="line line1"></span>
+    <span class="line line3"></span>
+    <span class="line line2"></span>
+  </label>
+  <div class="content">
+    <div
+      style="margin-top: 8em"
+      class="dataset"
+      *ngIf="currentView == 'Dataset'"
+    >
+      <div style="border: 1px solid #020321; padding: 30px" class="basic-card">
+        <div class="card-content">
+          <span class="card-title">Choose Dataset</span>
+          <p class="card-text">
+            Choose Dataset to proceed with training of the model
+          </p>
+        </div>
+
+        <div (click)="selectDataset()" class="card-link">
+          <p
+            *ngIf="!datasetSelected"
+            style="
+              background-color: black;
+              width: 30%;
+              color: white;
+              text-align: center;
+              padding: 8px;
+              border-radius: 12px;
+            "
+          >
+            Select Default Dataset
+          </p>
+        </div>
+
+        <div
+          *ngIf="datasetSelected"
+          (click)="viewDataSetDialog()"
+          class="card-link"
+        >
+          <label
+            style="
+              background-color: black;
+              width: 30%;
+              color: white;
+              text-align: center;
+              padding: 8px;
+            "
+          >
+            View Dataset
+          </label>
+        </div>
+
+        <div
+          *ngIf="datasetSelected"
+          (click)="changeView('Features')"
+          class="card-link"
+        >
+          <label
+            style="
+              background-color: black;
+              width: 30%;
+              color: white;
+              text-align: center;
+              padding: 8px;
+            "
+          >
+            Next
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features -->
+
+    <div
+      style="margin-top: 8em"
+      class="dataset"
+      *ngIf="currentView == 'Features'"
+    >
+      <div style="border: 1px solid #020321; padding: 30px" class="basic-card">
+        <div class="card-content">
+          <span class="card-title">Select Features</span>
+          <span
+            style="
+              text-align: center;
+              color: rgba(0, 0, 0, 0.623);
+              font-size: 10px;
+              padding-top: 10px;
+            "
+            >Select A Feature To Proceed</span
+          >
+        </div>
+        <div class="radio">
+
+          <mat-radio-group (change)="selectedFeature($event.value)" style="display: flex;flex-direction: column;" aria-label="Select an option">
+            <mat-radio-button style="padding-top: 10px;"  value="Unigram">Unigram</mat-radio-button>
+            <mat-radio-button style="padding-top: 10px;" value="Bigram">Bigram</mat-radio-button>
+            <mat-radio-button style="padding-top: 10px;" value="Trigram">Trigram</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        
+        <div (click)="changeView('Preprocess')" class="card-link">
+          <label
+            style="
+              background-color: black;
+              width: 30%;
+              color: white;
+              text-align: center;
+              padding: 8px;
+              border-radius: 12px;
+            "
+          >
+            Next
+          </label>
+        </div>
+        <div (click)="changeView('Dataset')" class="card-link">
+          <label
+            style="
+              border: 1px solid black;
+              width: 30%;
+              color: black;
+              background: white;
+              text-align: center;
+              padding: 8px;
+              border-radius: 12px;
+            "
+          >
+            Back
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preprocessing Steps -->
+
+    <div
+      style="margin-top: 8em"
+      class="dataset"
+      *ngIf="currentView == 'Preprocess'"
+    >
+      <div style="border: 1px solid #020321; padding: 30px" class="basic-card">
+        <div class="card-content">
+          <span class="card-title">Select Preprocessing Techniques</span>
+        </div>
+    
+        <div class="radio">
+          <mat-radio-group (change)="selectedPreprocessing($event.value)" style="display: flex;flex-direction: column;" aria-label="Select an option">
+            <mat-radio-button style="padding-top: 10px;"  value="1">Stopwords Removal</mat-radio-button>
+            <mat-radio-button style="padding-top: 10px;" value="2">Ressolve Numeronyms</mat-radio-button>
+            <mat-radio-button style="padding-top: 10px;" value="3">Lower Case Conversion</mat-radio-button>
+            <mat-radio-button style="padding-top: 10px;" value="4">Punctuations Removal</mat-radio-button>
+            <mat-radio-button style="padding-top: 10px;" value="all">All</mat-radio-button>
+          </mat-radio-group>
+
+        </div>
+        
+        <div (click)="changeView('mlModel')" class="card-link">
+          <label
+            style="
+              background-color: black;
+              width: 30%;
+              color: white;
+              text-align: center;
+              padding: 8px;
+              border-radius: 12px;
+            "
+          >
+            Next
+          </label>
+        </div>
+
+        <div (click)="changeView('Features')" class="card-link">
+          <label
+            style="
+              border: 1px solid black;
+              width: 30%;
+              color: black;
+              background: white;
+              text-align: center;
+              padding: 8px;
+              border-radius: 12px;
+            "
+          >
+            Back
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ML model -->
+    <div
+      style="margin-top: 8em"
+      class="dataset"
+      *ngIf="currentView == 'mlModel'"
+    >
+      <div style="border: 1px solid #020321; padding: 30px" class="basic-card">
+        <div class="card-content">
+          <span class="card-title">Select ML Model</span>
+        </div>
+
+        <div class="radio">
+          <mat-radio-group (change)="selectModel($event.value)" style="display: flex;flex-direction: column;" aria-label="Select an option">
+            <mat-radio-button style="padding-top: 10px;"  value="randomFOrest">Random Forest</mat-radio-button>
+            <mat-radio-button style="padding-top: 10px;" value="LogisticRegression">Logistic Regression</mat-radio-button>
+          </mat-radio-group>
+
+        </div>
+
+        <div (click)="changeView('valmeth')" class="card-link">
+          <label
+            style="
+              background-color: black;
+              width: 30%;
+              color: white;
+              text-align: center;
+              padding: 8px;
+              border-radius: 12px;
+            "
+          >
+            Next
+          </label>
+        </div>
+
+        <div (click)="changeView('Preprcess')" class="card-link">
+          <label
+            style="
+              border: 1px solid black;
+              width: 30%;
+              color: black;
+              background: white;
+              text-align: center;
+              padding: 8px;
+              border-radius: 12px;
+            "
+          >
+            Back
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- valmeth -->
+    <div
+      style="margin-top: 8em"
+      class="dataset"
+      *ngIf="currentView == 'valmeth'"
+    >
+      <div style="border: 1px solid #020321; padding: 30px" class="basic-card">
+        <div class="card-content">
+          <span class="card-title">Select Validation Technique</span>
+        </div>
+
+        <div class="radio">
+          <mat-radio-group (change)="validationTech($event.value)" style="display: flex;flex-direction: column;" aria-label="Select an option">
+            <mat-radio-button style="padding-top: 10px;"  value="holdout">Hold Out Method</mat-radio-button>
+            <mat-radio-button style="padding-top: 10px;" value="foldcross">10 Fold Cross</mat-radio-button>
+          </mat-radio-group>
+
+        </div>
+
+        <div (click)="changeView('evalMet')" class="card-link">
+          <label
+            style="
+              background-color: black;
+              width: 30%;
+              color: white;
+              text-align: center;
+              padding: 8px;
+              border-radius: 12px;
+            "
+          >
+            Next
+          </label>
+        </div>
+
+        <div (click)="changeView('mlModel')" class="card-link">
+          <label
+            style="
+              border: 1px solid black;
+              width: 30%;
+              color: black;
+              background: white;
+              text-align: center;
+              padding: 8px;
+              border-radius: 12px;
+            "
+          >
+            Back
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Evaluation Metrics -->
+    <div
+      style="margin-top: 8em"
+      class="dataset"
+      *ngIf="currentView == 'evalMet'"
+    >
+      <div style="border: 1px solid #020321; padding: 30px" class="basic-card">
+        <div class="card-content">
+          <span class="card-title">Select Evaluation Metrics</span>
+        </div>
+   
+        <div class="radio">
+          <mat-radio-group (change)="evalMat($event.value)" style="display: flex;flex-direction: column;" aria-label="Select an option">
+            <mat-radio-button style="padding-top: 10px;"  value="Precision">Precision</mat-radio-button>
+            <mat-radio-button style="padding-top: 10px;" value="Accuracy">Accuracy</mat-radio-button>
+            <mat-radio-button style="padding-top: 10px;"  value="Recall">Recall</mat-radio-button>
+            <mat-radio-button style="padding-top: 10px;" value="fmeasures">F-measures</mat-radio-button>
+            <mat-radio-button style="padding-top: 10px;" value="all">All</mat-radio-button>
+          </mat-radio-group>
+
+        </div>
+
+        <div (click)="delay()" class="card-link">
+          <label> Next </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- results -->
+    <div
+      style="margin-top: 8em"
+      class="dataset"
+      *ngIf="currentView == 'results'"
+    >
+      <div style="border: 1px solid #020321; padding: 30px" class="basic-card">
+        <div *ngIf="evalTech == 'Precision'" class="card-content">
+          <span class="card-title">Choose Dataset</span>
+          <p class="card-text">Precision is {{this.precision}}</p>
+          </div>
+
+        <div *ngIf="evalTech == 'Accuracy'" class="card-content">
+          <span class="card-title">Choose Dataset</span>
+          <p class="card-text">Accuracy is {{this.accuracy}}</p>
+        </div>
+
+        <div *ngIf="evalTech == 'Recall'" class="card-content">
+          <span class="card-title">Choose Dataset</span>
+          <p class="card-text">Recall is {{this.recall}}</p>
+        </div>
+
+        <div *ngIf="evalTech == 'fmeasures'" class="card-content">
+          <span class="card-title">Choose Dataset</span>
+          <p class="card-text">F-Measures is {{this.fmeasures}}</p>
+        </div>
+
+       
+        <div *ngIf="evalTech == 'all'" class="card-content">
+          <span class="card-title">Choose Dataset</span>
+          <p class="card-text">Accuracy is {{this.accuracy}}</p>
+          <p class="card-text">Precision is {{this.precision}}</p>
+          <p class="card-text">Recall is {{this.recall}}</p>
+          <p class="card-text">F-Measures is {{this.fmeasures}}</p>
+        </div>
+
+        <div (click)="saveModel()" class="card-link">
+          <label> SAVE MODEL </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div *ngIf="viewDataSet" class="viewDataset">
+  <span style="display: flex; justify-content: space-between">
+    <h3></h3>
+    <h3>Annotated Reviews Dataset</h3>
+    <h3 (click)="viewDataSetDialog()" class="hovereffect" style="color: red">
+      X
+    </h3>
+  </span>
+
+  <table class="my_table">
+    <tr>
+      <th>Review Text</th>
+      <th>Class Label</th>
+    </tr>
+    <tr *ngFor="let item of labels; let i = index">
+      <td>{{ reviews[i] }}</td>
+      <td>{{ item }}</td>
+    </tr>
+  </table>
+</div>
